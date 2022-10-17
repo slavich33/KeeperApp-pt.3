@@ -7,8 +7,8 @@ import CreateArea from "./CreateArea";
 function App() {
   const [items, setItems] = useState([]);
 
-  function addItem(input1, input2) {
-    const item = { title: input1, textArea: input2 };
+  function addItem(item) {
+    // const item = { title: input1, textArea: input2 };
     console.log(item);
 
     setItems((prevItems) => {
@@ -35,7 +35,7 @@ function App() {
           key={index}
           id={index}
           title={todoItem.title}
-          content={todoItem.textArea}
+          content={todoItem.content}
           onDel={deleteButton}
         />
       ))}

@@ -1,27 +1,50 @@
 import React, { useState } from "react";
 
 function CreateArea(props) {
-  const [titleText, setTitle] = useState("");
-  const [areaText, setArea] = useState("");
+  // const [titleText, setTitle] = useState("");
+  // const [areaText, setArea] = useState("");
 
-  function handleTitle(event) {
-    const newText = event.target.value;
-    setTitle(newText);
+  const [note, setNote] = useState({
+    title: "",
+    content: ""
+  });
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+
+    setNote((prevNote) => {
+      return {
+        ...prevNote,
+        [name]: value
+      };
+    });
   }
 
-  function handleArea(event) {
-    const newText = event.target.value;
-    setArea(newText);
-  }
+  // function handleTitle(event) {
+  //   const newText = event.target.value;
+  //   setTitle(newText);
+  // }
+
+  // function handleArea(event) {
+  //   const newText = event.target.value;
+  //   setArea(newText);
+  // }
 
   function handleButton(event) {
     // setItems((prevItems) => {
     //   return [...prevItems, titleText, areaText];
     // });
+
+    // setTitle("");
+    // setArea("");
+
+    props.onAdd(note);
+    setNote({
+      title: "",
+      content: ""
+    });
     event.preventDefault();
-    setTitle("");
-    setArea("");
-    return props.onAdd(titleText, areaText);
+
     // console.log(items);
   }
 
@@ -29,17 +52,17 @@ function CreateArea(props) {
     <div>
       <form>
         <input
-          onChange={handleTitle}
+          onChange={handleChange}
           name="title"
           placeholder="Title"
-          value={titleText}
+          value={note.title}
         />
         <textarea
-          onChange={handleArea}
+          onChange={handleChange}
+          value={note.content}
           name="content"
           placeholder="Take a note..."
           rows="3"
-          value={areaText}
         />
         <button onClick={handleButton}>Add</button>
       </form>
